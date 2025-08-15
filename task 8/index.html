@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Blog</title>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        /* General styles */
+        body {
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        .jumbotron {
+            background-color: #f8f9fa;
+        }
+        .jumbotron .display-4 {
+            font-size: 2.5rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            z-index: 1000;
+        }
+
+        /* Dark mode styles */
+        body[data-theme="dark"] {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        body[data-theme="dark"] .jumbotron,
+        body[data-theme="dark"] .bg-light {
+            background-color: #1e1e1e !important;
+            color: #e0e0e0;
+        }
+        body[data-theme="dark"] .card {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+            border-color: #333;
+        }
+        body[data-theme="dark"] .card-img-overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        body[data-theme="dark"] .form-control {
+            background-color: #2e2e2e;
+            color: #e0e0e0;
+            border-color: #444;
+        }
+        body[data-theme="dark"] .form-control::placeholder {
+            color: #888;
+        }
+        body[data-theme="dark"] .navbar {
+            background-color: #282c34 !important;
+        }
+        body[data-theme="dark"] .text-dark {
+            color: #e0e0e0 !important;
+        }
+        body[data-theme="dark"] .btn-primary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+    </style>
+</head>
+<body data-theme="light">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <a class="navbar-brand" href="#top">My Blog</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#top">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <button class="btn btn-dark" id="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <a id="top"></a>
+    <!-- Latest Post Section -->
+    <div class="container mt-5">
+        <div class="jumbotron">
+            <h1 class="display-4">Latest Post</h1>
+            <div class="row">
+                <div class="col-12" id="latest-post-container">
+                    <div class="card bg-dark text-white">
+                        <img id="latest-post-img" src="C:\Users\user\Desktop\internship\task 8\img1.jpg" class="card-img" alt="Latest Post Image" style="height: 400px; object-fit: cover;">
+                        <div class="card-img-overlay d-flex flex-column justify-content-end">
+                            <h5 class="card-title">The Ultimate Road Trip Guide</h5>
+                            <p class="card-text">Discover the best routes, tips, and tricks for an unforgettable road trip adventure.</p>
+                            <a href="#" class="btn btn-primary mt-2">Read More</a>
+                            <div class="mt-2">
+                                <label for="latest-post-upload" class="btn btn-sm btn-secondary">Upload Image</label>
+                                <input type="file" id="latest-post-upload" accept="image/jpeg" style="display:none;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Blog Posts Grid with Filtering -->
+    <div class="container mt-4">
+        <h2>All Posts</h2>
+        <div class="d-flex flex-wrap mb-3">
+            <button class="btn btn-outline-secondary mr-2 mb-2" data-category="all">All</button>
+            <button class="btn btn-outline-secondary mr-2 mb-2" data-category="travel">Travel</button>
+            <button class="btn btn-outline-secondary mr-2 mb-2" data-category="cooking">Cooking</button>
+            <button class="btn btn-outline-secondary mr-2 mb-2" data-category="art">Art</button>
+            <button class="btn btn-outline-secondary mr-2 mb-2" data-category="nature">Nature</button>
+            <button class="btn btn-outline-secondary mr-2 mb-2" data-category="technology">Technology</button>
+            <button class="btn btn-outline-secondary mr-2 mb-2" data-category="finance">Finance</button>
+        </div>
+        <div class="row" id="blog-posts-container">
+            <div class="col-md-4 mb-4 blog-post-card" data-category="travel">
+                <div class="card">
+                    <img id="travel-img" src="C:\Users\user\Desktop\internship\task 8\img3.jpg" class="card-img-top" alt="Travel Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Planning Your Next Adventure</h5>
+                        <p class="card-text">Everything you need to know to plan a stress-free and exciting trip.</p>
+                        <a href="#" class="btn btn-primary">Read More</a>
+                        <div class="mt-2">
+                            <label for="travel-upload" class="btn btn-sm btn-secondary">Upload Image</label>
+                            <input type="file" id="travel-upload" accept="image/jpeg" style="display:none;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4 blog-post-card" data-category="cooking">
+                <div class="card">
+                    <img id="cooking-img" src="C:\Users\user\Desktop\internship\task 8\img5.jpg" class="card-img-top" alt="Cooking Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Mastering the Art of Sourdough</h5>
+                        <p class="card-text">A comprehensive guide to baking your own delicious sourdough bread at home.</p>
+                        <a href="#" class="btn btn-primary">Read More</a>
+                        <div class="mt-2">
+                            <label for="cooking-upload" class="btn btn-sm btn-secondary">Upload Image</label>
+                            <input type="file" id="cooking-upload" accept="image/jpeg" style="display:none;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4 blog-post-card" data-category="art">
+                <div class="card">
+                    <img id="art-img" src="C:\Users\user\Desktop\internship\task 8\img14.jpg" class="card-img-top" alt="Art Image">
+                    <div class="card-body">
+                        <h5 class="card-title">The History of Impressionism</h5>
+                        <p class="card-text">An in-depth look at the Impressionist movement, its key artists, and masterpieces.</p>
+                        <a href="#" class="btn btn-primary">Read More</a>
+                        <div class="mt-2">
+                            <label for="art-upload" class="btn btn-sm btn-secondary">Upload Image</label>
+                            <input type="file" id="art-upload" accept="image/jpeg" style="display:none;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4 blog-post-card" data-category="nature">
+                <div class="card">
+                    <img id="nature-img" src="C:\Users\user\Desktop\internship\task 8\img8.jpg" class="card-img-top" alt="Nature Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Hiking in the Himalayas</h5>
+                        <p class="card-text">Explore the majestic trails and breathtaking views of the world's highest mountains.</p>
+                        <a href="#" class="btn btn-primary">Read More</a>
+                        <div class="mt-2">
+                            <label for="nature-upload" class="btn btn-sm btn-secondary">Upload Image</label>
+                            <input type="file" id="nature-upload" accept="image/jpeg" style="display:none;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4 blog-post-card" data-category="technology">
+                <div class="card">
+                    <img id="technology-img" src="\C:\Users\user\Desktop\internship\task 8\img11.jpg" class="card-img-top" alt="Technology Image">
+                    <div class="card-body">
+                        <h5 class="card-title">The Future of AI in Daily Life</h5>
+                        <p class="card-text">How artificial intelligence is shaping our world and what to expect next.</p>
+                        <a href="#" class="btn btn-primary">Read More</a>
+                        <div class="mt-2">
+                            <label for="technology-upload" class="btn btn-sm btn-secondary">Upload Image</label>
+                            <input type="file" id="technology-upload" accept="image/jpeg" style="display:none;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4 blog-post-card" data-category="finance">
+                <div class="card">
+                    <img id="finance-img" src="C:\Users\user\Desktop\internship\task 8\img10.jpg" class="card-img-top" alt="Finance Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Building a Better Budget</h5>
+                        <p class="card-text">Simple and effective strategies to help you take control of your personal finances.</p>
+                        <a href="#" class="btn btn-primary">Read More</a>
+                        <div class="mt-2">
+                            <label for="finance-upload" class="btn btn-sm btn-secondary">Upload Image</label>
+                            <input type="file" id="finance-upload" accept="image/jpeg" style="display:none;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="container mt-5 py-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <h1 class="mb-4">About Our Blog</h1>
+                <p class="lead">Welcome to My Simple Blog, your source for inspiration and information on a variety of topics. We are passionate about sharing stories, tips, and insights on everything from travel and cooking to art and technology.</p>
+                <p>Our mission is to create a community where readers can discover new interests, learn new skills, and connect with like-minded individuals. We believe that every day is an opportunity for a new adventure, and we're here to guide you along the way.</p>
+            </div>
+            <div class="col-lg-4 d-flex justify-content-center align-items-center">
+                <img id="about-img" src="C:\Users\user\Desktop\internship\task 8\img2.jpg" class="img-fluid rounded-circle" alt="Team Photo">
+                <div class="mt-2">
+                    <label for="about-upload" class="btn btn-sm btn-secondary">Upload Image</label>
+                    <input type="file" id="about-upload" accept="image/jpeg" style="display:none;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact" class="container mt-5 py-5">
+        <h1 class="mb-4 text-center">Contact Us</h1>
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea class="form-control" id="message" rows="5" placeholder="Your message here..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-light py-3 text-center mt-5">
+        <div class="container">
+            <a href="#" class="mr-3 text-dark"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="mr-3 text-dark"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="mr-3 text-dark"><i class="fab fa-instagram"></i></a>
+            <p>&copy; 2023 My Simple Blog</p>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <a href="#top" class="btn btn-dark rounded-circle back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Bootstrap JS CDN -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <!-- Custom JavaScript for image handling -->
+    <script>
+        // Function to handle post filtering
+        function handlePostFiltering(category) {
+            const cards = document.querySelectorAll('.blog-post-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Function to handle theme toggling
+        function handleThemeToggle() {
+            const body = document.body;
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+                themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        }
+
+        // Function to handle the back-to-top button
+        window.onscroll = function() {
+            const backToTopBtn = document.querySelector('.back-to-top');
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                backToTopBtn.style.display = "block";
+            } else {
+                backToTopBtn.style.display = "none";
+            }
+        };
+
+        // Function to handle file uploads
+        function handleImageUpload(inputId, imgId) {
+            const fileInput = document.getElementById(inputId);
+            const imgElement = document.getElementById(imgId);
+            
+            fileInput.addEventListener('change', function() {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        imgElement.src = e.target.result;
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        // Event listeners and initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.body.setAttribute('data-theme', savedTheme);
+                if (savedTheme === 'dark') {
+                    document.getElementById('theme-toggle').innerHTML = '<i class="fas fa-sun"></i>';
+                }
+            }
+            
+            // Add event listener for theme toggle button
+            document.getElementById('theme-toggle').addEventListener('click', handleThemeToggle);
+
+            // Add event listeners for filter buttons
+            document.querySelectorAll('.btn[data-category]').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const category = e.target.getAttribute('data-category');
+                    handlePostFiltering(category);
+                });
+            });
+
+            // Initialize image upload listeners
+            handleImageUpload('latest-post-upload', 'latest-post-img');
+            handleImageUpload('travel-upload', 'travel-img');
+            handleImageUpload('cooking-upload', 'cooking-img');
+            handleImageUpload('art-upload', 'art-img');
+            handleImageUpload('nature-upload', 'nature-img');
+            handleImageUpload('technology-upload', 'technology-img');
+            handleImageUpload('finance-upload', 'finance-img');
+            handleImageUpload('about-upload', 'about-img');
+        });
+    </script>
+</body>
+</html>
