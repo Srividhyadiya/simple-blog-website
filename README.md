@@ -4,4 +4,4 @@ My Simple Blog is a modern, responsive blog platform featuring posts on travel, 
 ![image alt](https://raw.githubusercontent.com/Srividhyadiya/simple-blog-website/9c1f0e5c9aa12f68f67bdb7d6a9853df801d0bb1/Screenshot%20(455).png)
 ![image alt](https://raw.githubusercontent.com/Srividhyadiya/simple-blog-website/c60a5ffbf555d49dc35e4bbac525e133caad60f5/Screenshot%20(457).png)
 ![image alt](https://raw.githubusercontent.com/Srividhyadiya/simple-blog-website/c60a5ffbf555d49dc35e4bbac525e133caad60f5/Screenshot%20(458).png)
-![image alt]()
+![image alt](https://github.com/Srividhyadiya/simple-blog-website/blob/main/Screenshot%20(459).png?raw=true)
